@@ -67,10 +67,10 @@
     <div class="mb-3">
       <label for="industry" class="form-label">industry</label>
       <select class="form-select" id="industry" required>
-        <option value="1">IT</option>
-        <option value="2">logistics</option>
-        <option value="3">finance</option>
-        <option value="4">other</option>
+        <option value="IT">IT</option>
+        <option value="logistics">logistics</option>
+        <option value="finance">finance</option>
+        <option value="other">other</option>
       </select>
     </div>
 
@@ -111,14 +111,34 @@
         houseNumber: document.getElementById("houseNumber").value,
         flatNumber: document.getElementById("flatNumber").value,
         postNumber: document.getElementById("postNumber").value,
-        comment: document.getElementById("comment"),
+        comment: document.getElementById("comments").value,
         industry: document.getElementById("industry").value,
         online: document.getElementById("online").checked
 
       }
-      customers.push(newCustomer)
-      console.log(newCustomer)
-      console.log(customers)
+      console.log("industry: ", newCustomer.industry)
+      let customerAlreadySaved = false
+      for (let i=0; i<customers.length; i++){
+        console.log("list:", customers[i].nip, "new:", newCustomer.nip)
+        if(customers[i].nip===newCustomer.nip)
+        {
+          // console.log("Customer already saved.")
+          customerAlreadySaved = true
+          customers[i] = newCustomer
+
+          break
+        }
+      }
+      // console.log("value check:", customerAlreadySaved)
+
+      if(!customerAlreadySaved){
+        customers.push(newCustomer)
+        console.log(newCustomer)
+        console.log(customers)
+      }
+
+      document.getElementById("form1").reset()
+
     }
 
 
@@ -141,15 +161,15 @@
       document.getElementById("online").checked = true;
       document.getElementById("online").disabled = true;
 
+      
+    console.log("Inserted some data into form")
     }
-
-    console.log("Tekst")
 
 
     function showForm() {
       document.getElementById("form1").style.display = "block"
       document.getElementById("list1").style.display = "none"
-
+      document.getElementById("NIP").readOnly = false;
     }
 
     function showList() {
@@ -157,16 +177,48 @@
       document.getElementById("form1").style.display = "none"
 
       let ul = document.getElementById("list1")
+      ul.innerHTML = ""
+      
       for (let i = 0; i < customers.length; i++) {
-        console.log("tekst")
-        ul.innerHTML += `<li class="list-group-item" onclick="showForm(); " editClient(${customers[i].nip}) >${customers[i].nip}</li>`  //tu wchodzi do editClient, porównuje czy juz mamy i zapisuje sobei nowe ?
+        console.log("displaing list")
+        ul.innerHTML += `<li class="list-group-item" onclick="editClient('${customers[i].nip}') ">${customers[i].nip}</li>`  
+
       }
 
     }
 
-    function editClient() {   //to edytowac
-
+    function editClient(nip) {   
+      showForm();
+      let customer
+      for (let i = 0; i < customers.length; i++) {
+        if(customers[i].nip==nip){
+          customer = customers[i]
+        }
+      }
+      console.log("inside of editClient()")
+      document.getElementById("companyName").value = customer.companyName;
+      document.getElementById("companyName").readOnly = false;
+      document.getElementById("NIP").value = customer.nip;
+      document.getElementById("NIP").readOnly = true;
+      document.getElementById("city").value = customer.city;
+      document.getElementById("city").readOnly = false;
+      document.getElementById("street").value = customer.street;
+      document.getElementById("street").readOnly = false;
+      document.getElementById("houseNumber").value = customer.houseNumber;
+      document.getElementById("houseNumber").readOnly = false;
+      document.getElementById("flatNumber").value = customer.flatNumber;
+      document.getElementById("flatNumber").readOnly = false;
+      document.getElementById("postNumber").value = customer.postNumber;
+      document.getElementById("postNumber").readOnly = false;
+      document.getElementById("online").checked = customer.checked;
+      document.getElementById("online").readOnly = false;
+      document.getElementById("comments").value = customer.comment;
+      document.getElementById("industry").value = customer.industry;
+      
     }
+
+
+
   </script>
 </footer>
 
