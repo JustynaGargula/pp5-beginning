@@ -84,11 +84,6 @@
   <button type="button" onclick="insert()">insert</button>
 
   <ul class="list-group" id="list1">
-    <!-- <li class="list-group-item">An item</li>
-    <li class="list-group-item">A second item</li>
-    <li class="list-group-item">A third item</li>
-    <li class="list-group-item">A fourth item</li>
-    <li class="list-group-item">And a fifth one</li> -->
   </ul>
 
   <button type="button" onclick="showList()">showList</button>
@@ -98,38 +93,52 @@
 </body>
 
 <footer>
+  <script src="customer.js"></script>
   <script>
 
     const customers = []
 
     function save() {
-      let newCustomer = {
-        companyName: document.getElementById("companyName").value,
-        nip: document.getElementById("NIP").value,
-        city: document.getElementById("city").value,
-        street: document.getElementById("street").value,
-        houseNumber: document.getElementById("houseNumber").value,
-        flatNumber: document.getElementById("flatNumber").value,
-        postNumber: document.getElementById("postNumber").value,
-        comment: document.getElementById("comments").value,
-        industry: document.getElementById("industry").value,
-        online: document.getElementById("online").checked
+      // let newCustomer = {
+      //   companyName: document.getElementById("companyName").value,
+      //   nip: document.getElementById("NIP").value,
+      //   city: document.getElementById("city").value,
+      //   street: document.getElementById("street").value,
+      //   houseNumber: document.getElementById("houseNumber").value,
+      //   flatNumber: document.getElementById("flatNumber").value,
+      //   postNumber: document.getElementById("postNumber").value,
+      //   comment: document.getElementById("comments").value,
+      //   industry: document.getElementById("industry").value,
+      //   online: document.getElementById("online").checked
 
-      }
+      // }
+
+      let newCustomer = new Customer();
+      newCustomer.companyName = document.getElementById("companyName").value;
+      newCustomer.nip = document.getElementById("NIP").value;
+      newCustomer.city = document.getElementById("city").value;
+      newCustomer.street = document.getElementById("street").value;
+      newCustomer.houseNumber = document.getElementById("houseNumber").value;
+      newCustomer.flatNumber = document.getElementById("flatNumber").value;
+      newCustomer.postNumber = document.getElementById("postNumber").value;
+      newCustomer.comment = document.getElementById("comments").value;
+      newCustomer.industry = document.getElementById("industry").value;
+      newCustomer.online = document.getElementById("online").checked;
+
+      console.log(newCustomer.getAddress());
+
       console.log("industry: ", newCustomer.industry)
       let customerAlreadySaved = false
       for (let i=0; i<customers.length; i++){
         console.log("list:", customers[i].nip, "new:", newCustomer.nip)
         if(customers[i].nip===newCustomer.nip)
         {
-          // console.log("Customer already saved.")
           customerAlreadySaved = true
           customers[i] = newCustomer
 
           break
         }
       }
-      // console.log("value check:", customerAlreadySaved)
 
       if(!customerAlreadySaved){
         customers.push(newCustomer)
@@ -181,7 +190,8 @@
       
       for (let i = 0; i < customers.length; i++) {
         console.log("displaing list")
-        ul.innerHTML += `<li class="list-group-item" onclick="editClient('${customers[i].nip}') ">${customers[i].nip}</li>`  
+        ul.innerHTML += `<li class="list-group-item" onclick="editClient('${customers[i].nip}') ">
+          Company name: ${customers[i].companyName} NIP: ${customers[i].nip} Address: ${customers[i].getAddress()}</li>`  
 
       }
 
@@ -219,7 +229,9 @@
 
 
 
+
   </script>
+
 </footer>
 
 </html>
