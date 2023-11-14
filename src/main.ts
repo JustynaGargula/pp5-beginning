@@ -117,6 +117,6 @@ const customers: Customer[] = []
     }
 
 function getElementById(elementName: string): HTMLInputElement{
-  return getElementById(elementName) as HTMLInputElement;
+  return document.getElementById(elementName) as HTMLInputElement;
 }
 
