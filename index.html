@@ -15,9 +15,9 @@
 </head>
 
 <body>
-  <h1>Hello, world!</h1>
+  <h1 class="center">Hello, world!</h1>
 
-  <form id="form1">
+  <form class="form" id="form1">
     <div class="mb-3">
       <label for="companyName" class="form-label">company name</label>
       <input type="text" class="form-control" id="companyName" required>
@@ -68,15 +68,16 @@
     </div>
 
   </form>
-  <button type="button" onclick="save()">save</button>
-  <button type="button" onclick="insert()">insert</button>
 
-  <ul class="list-group" id="list1">
+  <ul class="list-group"  id="list1">
   </ul>
 
-  <button type="button" onclick="showList()">showList</button>
-  <button type="button" onclick="showForm()">Show form</button>
-
+  <div class="center">
+    <button type="button" class="btn btn-outline-light" onclick="save()">save</button>
+    <button type="button" class="btn btn-outline-light" onclick="insert()">insert</button>
+    <button type="button" class="btn btn-outline-light" onclick="showList()">show list</button>
+    <button type="button" class="btn btn-outline-light" onclick="showForm()">show form</button>
+  </div>
 
 </body>
 

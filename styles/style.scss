@@ -1,2 +1,12 @@
-$body-bg: black;
+$body-bg: #244A6E;
 $body-color: white;
+
+.center{
+    text-align: center;
+    margin: 2%;
+}
+.form{
+    margin: 2%;
+}
+
+@import "../node_modules/bootstrap/scss/bootstrap";
